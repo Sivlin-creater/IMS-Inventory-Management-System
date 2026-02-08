@@ -1,0 +1,48 @@
+<div class="dashboard-layout">
+
+  <!-- ==========SIDEBAR========== -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1 class="ims">IMS</h1>
+      <button class="theme-toggle" (click)="toggleTheme()" title="Toggle theme">
+        <span *ngIf="isDarkTheme">☀️</span>
+        <span *ngIf="!isDarkTheme">🌙</span>
+      </button>
+    </div>
+    <ul class="nav-links">
+      <li *ngIf="isAuth()"><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+      <li *ngIf="isAuth()"><a routerLink="/transaction" routerLinkActive="active">Transactions</a></li>
+      <li *ngIf="isAdmin()"><a routerLink="/category" routerLinkActive="active">Category</a></li>
+      <li *ngIf="isAdmin()"><a routerLink="/product" routerLinkActive="active">Product</a></li>
+      <li *ngIf="isAdmin()"><a routerLink="/supplier" routerLinkActive="active">Supplier</a></li>
+      <li *ngIf="isAuth()"><a routerLink="/purchase" routerLinkActive="active">Purchase</a></li>
+      <li *ngIf="isAuth()"><a routerLink="/sell" routerLinkActive="active">Sale</a></li>
+      <li *ngIf="isAuth()"><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+      <li *ngIf="!isAuth()"><a routerLink="/login" routerLinkActive="active">Login</a></li>
+      <li *ngIf="!isAuth()"><a routerLink="/register" routerLinkActive="active">Register</a></li>
+      <li *ngIf="isAuth()"><a class="logout-link" (click)="logOut()">Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- ==========MAIN CONTENT========== -->
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- ==========LOGOUT CONFIRMATION MODAL========== -->
+  <div class="logout-modal-overlay" *ngIf="showLogoutModal">
+    <div class="logout-modal">
+      <div class="modal-header">
+        <h2>Confirm Logout</h2>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to logout?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="cancelLogout()">Cancel</button>
+        <button class="btn-confirm" (click)="confirmLogout()">Yes, Logout</button>
+      </div>
+    </div>
+  </div>
+
+</div>

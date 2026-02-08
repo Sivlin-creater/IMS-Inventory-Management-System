@@ -1,0 +1,67 @@
+<div class="dashboard-container">
+  <h1>Transaction Dashboard</h1>
+
+  <!-- Transaction Selection -->
+  <div style="margin-bottom: 50px; margin-top: 30px;">
+    <label>Select Month:</label>
+    <select [(ngModel)]="selectedMonth">
+      <option *ngFor="let month of months" [value]="month.value">
+        {{ month.name }}
+      </option>
+    </select>
+
+    <label>Select Year:</label>
+    <select [(ngModel)]="selectedYear">
+      <option *ngFor="let year of years" [value]="year">
+        {{ year }}
+      </option>
+    </select>
+
+    <button (click)="loadMonthlyData()">Show Monthly Data</button>
+  </div>
+
+  <!-- =================== -->
+  <!-- Transaction Count Pie Chart -->
+  <!-- =================== -->
+  <div style="margin-bottom: 40px;">
+    <h2>Transaction Counts by Type</h2>
+
+    <apx-chart
+      *ngIf="chartTypeOptions"
+      [series]="chartTypeOptions.series"
+      [chart]="chartTypeOptions.chart"
+      [labels]="chartTypeOptions.labels"
+      [legend]="chartTypeOptions.legend">
+    </apx-chart>
+  </div>
+
+  <!-- =================== -->
+  <!-- Total Amount by Type Bar Chart -->
+  <!-- =================== -->
+  <div style="margin-bottom: 40px;">
+    <h2>Total Transaction Amount by Type</h2>
+
+    <apx-chart
+      *ngIf="chartAmountOptions"
+      [series]="chartAmountOptions.series"
+      [chart]="chartAmountOptions.chart"
+      [xaxis]="chartAmountOptions.xaxis"
+      [legend]="chartAmountOptions.legend">
+    </apx-chart>
+  </div>
+
+  <!-- =================== -->
+  <!-- Monthly Line Chart -->
+  <!-- =================== -->
+  <div style="margin-bottom: 40px;">
+    <h2>Monthly Transaction Chart</h2>
+
+    <apx-chart
+      *ngIf="chartMonthlyOptions"
+      [series]="chartMonthlyOptions.series"
+      [chart]="chartMonthlyOptions.chart"
+      [xaxis]="chartMonthlyOptions.xaxis">
+    </apx-chart>
+  </div>
+</div>
+

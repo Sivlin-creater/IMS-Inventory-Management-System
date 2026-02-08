@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IMS Theme Preview</title>
+  <style>
+    :root{
+      --padding: 18px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color-scheme: light;
+    }
+
+    body{margin:0;background:#f1f5f9;padding:24px}
+    .wrap{display:flex;gap:18px;align-items:flex-start}
+    .panel{width:48%;border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+
+    /* ORIGINAL THEME (left) */
+    .orig{--sidebar-grad: linear-gradient(135deg,#1c1e21,#3a3f44);--sidebar-text:#f1f1f1;--accent:#17a2b8;--main-bg:#f5f7fa}
+    .orig .sidebar{background:var(--sidebar-grad);color:var(--sidebar-text)}
+    .orig .ims{color:var(--accent)}
+    .orig .main{background:var(--main-bg)}
+
+    /* DARK THEME (right) */
+    .dark{--sidebar-grad: linear-gradient(135deg,#071222,#0f1724);--sidebar-text:#E6F7F8;--accent:#17a2b8;--main-bg:#0B1220;--card-bg:#0F1724;--text:#E6F7F8;--muted:#A9B4B6}
+    .dark .sidebar{background:var(--sidebar-grad);color:var(--sidebar-text)}
+    .dark .ims{color:var(--accent)}
+    .dark .main{background:var(--main-bg);color:var(--text)}
+
+    /* Shared layout */
+    .header{display:flex;align-items:center;justify-content:space-between;padding:12px var(--padding);background:transparent}
+    .sidebar{width:220px;display:flex;flex-direction:column;gap:8px;padding:22px}
+    .ims{font-weight:800;font-size:28px;margin:0}
+    .nav{list-style:none;padding:0;margin:12px 0 0}
+    .nav li{margin:10px 0}
+    .nav a{color:inherit;text-decoration:none;padding:8px 10px;border-radius:8px;display:inline-block}
+    .nav a:hover{background:rgba(255,255,255,0.04)}
+
+    .content{padding:24px}
+    .main{min-height:300px;padding:var(--padding);display:flex;flex-direction:column;gap:14px}
+    .card{background:rgba(255,255,255,0.95);padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .dark .card{background:var(--card-bg);box-shadow:0 8px 24px rgba(0,0,0,0.6);}
+
+    .btn{display:inline-block;padding:10px 16px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+    .btn-primary{background:linear-gradient(135deg,var(--accent),#00c2d1);color:white}
+    .btn-secondary{background:#e9ecef;color:#333}
+    .dark .btn-secondary{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.06)}
+
+    .swatches{display:flex;gap:10px;flex-wrap:wrap}
+    .sw{width:92px;padding:10px;border-radius:8px;color:#fff;font-size:12px;text-align:center}
+    .sw small{display:block;font-size:11px;opacity:.9}
+
+    /* modal preview */
+    .preview-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:360px;border-radius:10px;padding:0;z-index:999;display:none}
+    .preview-modal .modal-inner{border-radius:10px;overflow:hidden}
+    .preview-modal .modal-header{padding:18px;text-align:center;color:#fff}
+    .preview-modal .modal-body{padding:18px;background:#fff;color:#333}
+    .dark .preview-modal .modal-body{background:var(--card-bg);color:var(--text)}
+    .preview-modal.show{display:block}
+
+    .legend{padding:12px 16px;background:#fff;border-top:1px solid #eee;font-size:13px}
+    .dark .legend{background:transparent;color:var(--muted);border-top:1px dashed rgba(255,255,255,0.04)}
+
+    /* color boxes for legend */
+    .color-row{display:flex;gap:10px;align-items:center}
+    .color-box{width:28px;height:20px;border-radius:4px;border:1px solid rgba(0,0,0,0.06)}
+
+  </style>
+</head>
+<body>
+  <h2 style="margin:0 0 12px">IMS Theme Preview — left: Original | right: Dark proposal</h2>
+
+  <div class="wrap">
+
+    <section class="panel orig">
+      <div class="header">
+        <div style="display:flex;align-items:center;gap:12px;padding-left:10px">
+          <div style="width:220px"></div>
+          <div style="padding:10px 0 0 0"><strong>Original (current)</strong></div>
+        </div>
+      </div>
+      <div style="display:flex">
+        <aside class="sidebar">
+          <h1 class="ims">IMS</h1>
+          <ul class="nav">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Transactions</a></li>
+            <li><a href="#">Category</a></li>
+            <li><a href="#">Product</a></li>
+            <li><a href="#">Supplier</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Login</a></li>
+          </ul>
+        </aside>
+        <main class="main" style="flex:1;">
+          <div class="card">
+            <h3 style="margin:0 0 8px">Dashboard</h3>
+            <p style="margin:0 0 12px">Main content area with soft background to avoid harsh white.</p>
+            <div style="display:flex;gap:8px"><button class="btn btn-primary">Primary</button><button class="btn btn-secondary">Secondary</button></div>
+          </div>
+          <div class="card">
+            <div class="swatches">
+              <div class="sw" style="background:var(--sidebar-grad)"><small>Sidebar</small><strong style="display:block;margin-top:6px">#1c1e21 → #3a3f44</strong></div>
+              <div class="sw" style="background:#17a2b8"><small>Accent</small><strong>#17a2b8</strong></div>
+              <div class="sw" style="background:#f5f7fa;color:#333"><small>Main bg</small><strong style="color:#333">#f5f7fa</strong></div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <div class="legend">
+        <div class="color-row"><div class="color-box" style="background:#1c1e21"></div><small style="opacity:.9;margin-left:6px">Sidebar start: #1c1e21</small></div>
+      </div>
+    </section>
+
+    <section class="panel dark">
+      <div class="header">
+        <div style="display:flex;align-items:center;gap:12px;padding-left:10px">
+          <div style="width:220px"></div>
+          <div style="padding:10px 0 0 0"><strong>Dark theme (proposal)</strong></div>
+        </div>
+      </div>
+      <div style="display:flex">
+        <aside class="sidebar">
+          <h1 class="ims">IMS</h1>
+          <ul class="nav">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Transactions</a></li>
+            <li><a href="#">Category</a></li>
+            <li><a href="#">Product</a></li>
+            <li><a href="#">Supplier</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Login</a></li>
+          </ul>
+        </aside>
+        <main class="main" style="flex:1;">
+          <div class="card">
+            <h3 style="margin:0 0 8px">Dashboard</h3>
+            <p style="margin:0 0 12px">Dark background is softer for eyes and maintains contrast with accent.</p>
+            <div style="display:flex;gap:8px"><button class="btn btn-primary">Primary</button><button class="btn btn-secondary">Secondary</button></div>
+          </div>
+
+          <div class="card">
+            <div class="swatches">
+              <div class="sw" style="background:linear-gradient(135deg,#071222,#0f1724)"><small>Sidebar</small><strong style="display:block;margin-top:6px">#071222 → #0f1724</strong></div>
+              <div class="sw" style="background:#17a2b8"><small>Accent</small><strong>#17a2b8</strong></div>
+              <div class="sw" style="background:#0B1220"><small>Main bg</small><strong>#0B1220</strong></div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <div class="legend">
+        <div class="color-row"><div class="color-box" style="background:#071222"></div><small style="opacity:.9;margin-left:6px">Sidebar start: #071222</small></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- modal preview (static dark) -->
+  <div id="previewModal" class="preview-modal">
+    <div class="modal-inner">
+      <div class="modal-header" style="background:linear-gradient(135deg,#17a2b8,#00c2d1)">Confirm Logout</div>
+      <div class="modal-body">Are you sure you want to logout?<div style="margin-top:12px;text-align:right"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button> <button class="btn btn-primary">Yes, Logout</button></div></div>
+    </div>
+  </div>
+
+  <script>
+    // simple show modal on load to preview
+    function openModal(){document.getElementById('previewModal').classList.add('show')}
+    function closeModal(){document.getElementById('previewModal').classList.remove('show')}
+    // open it for visual demonstration
+    setTimeout(openModal,600);
+  </script>
+
+</body>
+</html>
